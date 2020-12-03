@@ -1,4 +1,4 @@
-module github.com/mellow-io/go-tun2socks
+module github.com/automsen/go-tun2socks
 
 go 1.13
 
@@ -14,8 +14,8 @@ require (
 	v2ray.com/core v4.19.1+incompatible
 )
 
-replace github.com/eycorsican/go-tun2socks => github.com/mellow-io/go-tun2socks v1.0.9-0.20200814044818-ee3275c43e54
+replace github.com/eycorsican/go-tun2socks => github.com/automsen/go-tun2socks v1.0.9-0.20200814044818-ee3275c43e54
 
-replace v2ray.com/core => github.com/mellow-io/v2ray-core v0.0.0-20200621073531-898a5935c60d
+replace v2ray.com/core => github.com/automsen/v2ray-core v0.0.0-20200621073531-898a5935c60d
 
-replace github.com/songgao/water => github.com/mellow-io/water v0.0.0-20200621073504-499fe8e42129
+replace github.com/songgao/water => github.com/automsen/water v0.0.0-20200621073504-499fe8e42129
