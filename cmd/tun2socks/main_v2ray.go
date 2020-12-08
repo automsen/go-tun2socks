@@ -184,10 +184,10 @@ func init() {
 		}
 
 		if *args.Encry {
-
+			log.Infof("-----11---", *args.EncryKey, string(configBytes))
 			decodeBytes, _ := base64.StdEncoding.DecodeString(string(configBytes))
 			dst, _ := openssl.AesECBDecrypt(decodeBytes, []byte(*args.EncryKey), openssl.PKCS7_PADDING)
-
+			log.Infof("-----33---", len(dst))
 			configBytes = dst
 
 			log.Infof("-----11---")
