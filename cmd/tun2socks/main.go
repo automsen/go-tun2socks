@@ -67,6 +67,8 @@ type CmdArgs struct {
 	Stats                 *bool
 	SendThrough           *string
 	RpcPort               *int
+	Encry                 *bool
+	EncryKey              *string
 }
 
 type cmdFlag uint
