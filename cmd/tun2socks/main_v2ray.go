@@ -24,6 +24,9 @@ import (
 	"github.com/eycorsican/go-tun2socks/common/log"
 	"github.com/eycorsican/go-tun2socks/core"
 	"github.com/eycorsican/go-tun2socks/proxy/v2ray"
+
+	"encoding/base64"
+	"github.com/forgoer/openssl"
 )
 
 type Resolver struct {
@@ -107,6 +110,9 @@ func init() {
 
 	args.VConfig = flag.String("vconfig", "config.json", "Config file for v2ray, in JSON format, and note that routing in v2ray could not violate routes in the routing table")
 	args.SniffingType = flag.String("sniffingType", "http,tls", "Enable domain sniffing for specific kind of traffic in v2ray")
+	//加密文件 add by tanglongsen
+	args.Encry = flag.Bool("encry", false, "encry is true or false.")
+	args.EncryKey = flag.String("encryKey", "", "encry is key.")
 
 	registerHandlerCreater("v2ray", func() {
 		core.SetBufferPool(vbytespool.GetPool(core.BufSize))
@@ -175,6 +181,14 @@ func init() {
 			if s == "http" || s == "tls" {
 				validSniffings = append(validSniffings, s)
 			}
+		}
+
+		if *args.Encry {
+
+			decodeBytes, _ := base64.StdEncoding.DecodeString(string(configBytes))
+			dst, _ := openssl.AesECBDecrypt(decodeBytes, []byte(*args.EncryKey), openssl.PKCS7_PADDING)
+
+			configBytes = dst
 		}
 
 		v, err := vcore.StartInstance("json", configBytes)
