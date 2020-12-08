@@ -113,7 +113,7 @@ func init() {
 	//加密文件 add by tanglongsen
 	args.Encry = flag.Bool("encry", false, "encry is true or false.")
 	args.EncryKey = flag.String("encryKey", "", "encry is key.")
-
+	log.Infof("--------", args)
 	registerHandlerCreater("v2ray", func() {
 		core.SetBufferPool(vbytespool.GetPool(core.BufSize))
 
@@ -182,15 +182,16 @@ func init() {
 				validSniffings = append(validSniffings, s)
 			}
 		}
-
+		//加密文件 modify by tanglongsen
 		if *args.Encry {
+			log.Infof("-----00---", *args.Encry, *args.EncryKey)
 			log.Infof("-----11---", *args.EncryKey, string(configBytes))
 			decodeBytes, _ := base64.StdEncoding.DecodeString(string(configBytes))
 			dst, _ := openssl.AesECBDecrypt(decodeBytes, []byte(*args.EncryKey), openssl.PKCS7_PADDING)
 			log.Infof("-----33---", len(dst))
 			configBytes = dst
 
-			log.Infof("-----11---")
+			log.Infof("-----44---")
 		}
 
 		log.Infof("-----configBytes---", string(configBytes))
