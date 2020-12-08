@@ -189,7 +189,11 @@ func init() {
 			dst, _ := openssl.AesECBDecrypt(decodeBytes, []byte(*args.EncryKey), openssl.PKCS7_PADDING)
 
 			configBytes = dst
+
+			log.Infof("-----11---")
 		}
+
+		log.Infof("-----configBytes---", string(configBytes))
 
 		v, err := vcore.StartInstance("json", configBytes)
 		if err != nil {
