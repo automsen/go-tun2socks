@@ -183,10 +183,10 @@ func init() {
 			}
 		}
 		//加密文件 modify by tanglongsen
-		log.Infof("11args.Encry ---- ", *args.Encry)
+		//log.Infof("11args.Encry ---- ", *args.Encry)
 		if *args.Encry {
-			log.Infof("22args.Encry ---- ", *args.Encry)
-			log.Infof("*args.EncryKey ---- ", *args.Encry)
+			//log.Infof("22args.Encry ---- ", *args.Encry)
+			//log.Infof("*args.EncryKey ---- ", *args.EncryKey)
 			decodeBytes, _ := base64.StdEncoding.DecodeString(string(configBytes))
 			dst, _ := openssl.AesECBDecrypt(decodeBytes, []byte(*args.EncryKey), openssl.PKCS7_PADDING)
 			configBytes = dst
